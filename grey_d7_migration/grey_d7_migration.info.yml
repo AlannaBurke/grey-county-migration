@@ -1,0 +1,10 @@
+name: Grey County Migration
+type: module
+description: Migration scripts and plugins for Grey County Drupal 7 to Drupal 8.
+dependencies:
+  - migrate_plus
+  - migrate_tools
+  - migrate_drupal
+  - node
+  - taxonomy
+core: 8.x

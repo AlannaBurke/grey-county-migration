@@ -1,0 +1,101 @@
+# The name of this migration.
+id: banner
+# A human readable label for the migration.
+label: Banner Paragraph Migration
+migration_group: grey-county-d7
+migration_tags:
+  - paragraph
+  - Drupal 7
+source:
+  plugin: d7_paragraphs_item
+  # The machine name of the paragraph in D7.
+  bundle: image
+destination:
+  plugin: entity_reference_revisions:paragraph
+  # The machine name of the paragraph in D8.
+  default_bundle: banner
+process:
+  # The machine name of the field in D8.
+  field_banner_title:
+    plugin: sub_process
+    # The machine name of the field in D7.
+    source: field_banner_text
+    process:
+      target_id:
+        -
+          plugin: migration_lookup
+          migration:
+            - image
+            - call_to_action
+            - blockquote
+            - content_text
+            - large_text
+            - left_image_and_text
+            - pp_image_gallery
+            - right_image_and_text
+            - wide-image
+          source: value
+        -
+          plugin: extract
+          index:
+            - 0
+      target_revision_id:
+        -
+          plugin: migration_lookup
+          migration:
+            - image
+            - call_to_action
+            - blockquote
+            - content_text
+            - large_text
+            - left_image_and_text
+            - pp_image_gallery
+            - right_image_and_text
+            - wide-image
+          source: value
+        -
+          plugin: extract
+          index:
+            - 0
+  # The machine name of the field  in D8.
+  field_banner_text:
+    plugin: sub_process
+    # The machine name of the field in D7
+    source: field_banner_long_text
+    process:
+      target_id:
+        -
+          plugin: migration_lookup
+          migration:
+            - image
+            - call_to_action
+            - blockquote
+            - content_text
+            - large_text
+            - left_image_and_text
+            - pp_image_gallery
+            - right_image_and_text
+            - wide-image
+          source: value
+        -
+          plugin: extract
+          index:
+            - 0
+      target_revision_id:
+        -
+          plugin: migration_lookup
+          migration:
+            - image
+            - call_to_action
+            - blockquote
+            - content_text
+            - large_text
+            - left_image_and_text
+            - pp_image_gallery
+            - right_image_and_text
+            - wide-image
+          source: value
+        -
+          plugin: extract
+          index:
+            - 0

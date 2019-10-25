@@ -1,0 +1,54 @@
+# The name of this migration.
+id: content_text
+label: Content Text Paragraph Migration
+migration_group: grey-county-d7
+migration_tags:
+  - paragraph
+  - Drupal 7
+source:
+  plugin: d7_node
+  node_type: local_profiles
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: content_text
+process:
+  field_paragraph_content:
+    plugin: sub_process
+    source: field_paragraph_content
+    process:
+      target_id:
+        -
+          plugin: migration_lookup
+          migration:
+            - image
+            - call_to_action
+            - blockquote
+            - content_text
+            - large_text
+            - left_image_and_text
+            - pp_image_gallery
+            - right_image_and_text
+            - wide-image
+          source: value
+        -
+          plugin: extract
+          index:
+            - 0
+      target_revision_id:
+        -
+          plugin: migration_lookup
+          migration:
+            - image
+            - call_to_action
+            - blockquote
+            - content_text
+            - large_text
+            - left_image_and_text
+            - pp_image_gallery
+            - right_image_and_text
+            - wide-image
+          source: value
+        -
+          plugin: extract
+          index:
+            - 0
